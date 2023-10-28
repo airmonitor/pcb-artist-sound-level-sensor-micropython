@@ -114,7 +114,7 @@ class PCBArtistSoundLevel:
     def enable_fast_mode_intensity_measurement(self):
         """
         Enables fast mode for intensity measurement.
-        TavgH = 0, TavgL = 125
+        TavgH = 0x00, TavgL = 0x7D
 
         Returns:
             None
