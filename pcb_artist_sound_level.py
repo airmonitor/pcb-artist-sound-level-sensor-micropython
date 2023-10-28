@@ -116,9 +116,6 @@ class PCBArtistSoundLevel:
         Enables fast mode for intensity measurement.
         TavgH = 0, TavgL = 125
 
-        Args:
-            None
-
         Returns:
             None
 
