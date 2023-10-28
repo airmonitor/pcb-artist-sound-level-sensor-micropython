@@ -27,11 +27,6 @@ I2C_REG_HISTORY_99 = 0x77
 
 
 ###############################################
-# Settings
-
-# Initialize I2C with pins
-i2c = machine.I2C(0, scl=machine.Pin(22), sda=machine.Pin(21), freq=100000)
-
 
 class PCBArtistSoundLevel:
     def __init__(self, i2c: machine.I2C, addr: int = PCB_ARTISTS_DBM):
@@ -115,3 +110,39 @@ class PCBArtistSoundLevel:
 
         read_data = self.reg_read(reg=reg, nbytes=nbytes)
         return int.from_bytes(read_data, "big")
+
+    def enable_fast_mode_intensity_measurement(self):
+        """
+        Enables fast mode for intensity measurement.
+        TavgH = 0, TavgL = 125
+
+        Args:
+            None
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+
+        self.reg_write(reg=I2C_REG_TAVG_LOW, data=0x7D)
+        self.reg_write(reg=I2C_REG_TAVG_HIGH, data=0x00)
+
+    def enable_standard_mode_intensity_measurement(self):
+        """
+        Enables fast mode for intensity measurement.
+        TavgH = 0x03, TavgL = 0xE8
+
+        Args:
+            None
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+
+        self.reg_write(reg=I2C_REG_TAVG_LOW, data=0xE8)
+        self.reg_write(reg=I2C_REG_TAVG_HIGH, data=0x03)
